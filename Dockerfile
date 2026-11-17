@@ -7,6 +7,9 @@ RUN useradd --create-home --uid 10001 wellpack && mkdir -p /app/data && chown we
 COPY --chown=wellpack:wellpack app.py security.py ./
 COPY --chown=wellpack:wellpack engine/ ./engine/
 COPY --chown=wellpack:wellpack static/ ./static/
+COPY --chown=wellpack:wellpack frontend-release/ ./frontend-release/
+COPY --chown=wellpack:wellpack build_frontend.py ./
 USER wellpack
+RUN python build_frontend.py
 EXPOSE 8000
 CMD ["sh", "-c", "exec uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]
