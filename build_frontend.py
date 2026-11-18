@@ -35,6 +35,7 @@ searchguard=runpy.run_path(str(ROOT/'frontend-release'/'last_search_guard_v6.py'
 gridfix=runpy.run_path(str(ROOT/'frontend-release'/'safe_card_grid_v7.py'))['apply'](ROOT,assets)
 premium=runpy.run_path(str(ROOT/'frontend-release'/'premium_rcs_v3.py'))['apply'](ROOT,assets)
 photos=runpy.run_path(str(ROOT/'frontend-release'/'brand_images_v1.py'))['apply'](ROOT,assets)
+formats=runpy.run_path(str(ROOT/'frontend-release'/'pitch_formats_v1.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
 assert len(case_state['ops'])==23 and len(case_state['clients'])==23
 assert len({o['id'] for o in case_state['ops']})==23
@@ -61,6 +62,9 @@ assert 'premium-rcs-v3-script' in assets['index.html']
 assert 'window.WIPremiumRCS' in assets['index.html']
 assert 'brand-image-library-script' in assets['index.html']
 assert 'WIBrandImages' in assets['index.html']
+assert 'id="wi-formats-v1-script"' in assets['index.html']
+assert 'wf-mode-switch' in assets['index.html']
+assert 'Pitch commercial express' in assets['index.html']
 assert 'safeCardRendering' in gridfix
 assert "$('search')" not in assets['index.html']
 assert '<section class="wi-v2-radar"' not in assets['index.html']
@@ -70,14 +74,14 @@ assert 'date de vérification' in assets['index.html']
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261118-prospect-image-library','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,**gridfix,**premium,**photos,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-sales-presentation-formats','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,**gridfix,**premium,**photos,**formats,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
 assert old_health in app_text
 app_text=app_text.replace(old_health,'async def healthz():return '+repr({'ok':True,**release}),1)
 app_path.write_text(app_text,encoding='utf-8')
-print('Frontend ready: 23 campaigns, public-site photo picker for RCS/PDF, SMS and LP preserved.',flush=True)
+print('Frontend ready: 23 campaigns, three sales deck formats, premium RCS and site imagery.',flush=True)
 
 with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
     test_password=secrets.token_urlsafe(24)
