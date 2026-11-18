@@ -40,6 +40,19 @@ function briefPages(reference){
  '<div class="wf-source-list"><b>SOURCES À RECONTRÔLER</b>'+sourced.map(e=>'<span>'+safe(e.claim||e.url,100)+'</span>').join('')+'</div>';
  return [sheet(1,2,summary,'wf-brief',reference),sheet(2,2,scripts,'wf-brief',reference)];
 }
+function patchCover(){
+ if(!active)return;
+ const page=document.querySelector('#proposalPages > .doc-cover');
+ if(!page||page.querySelector('.wf-cover-visual'))return;
+ let m;try{m=api.read()}catch{return}
+ const image=m.imageData||window.WIRCS?.cards?.(active.o,m)?.[0]?.imageData||'';
+ const imageOK=/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(image);
+ const el=document.createElement('div');el.className='wf-cover-visual';
+ if(imageOK){const img=document.createElement('img');img.src=image;img.alt='Visuel proposé pour '+active.o.brand;el.append(img)}
+ else{el.innerHTML='<div class="wf-cover-art"><i></i><i></i><i></i><span>VOTRE IDÉE<br>DE CAMPAGNE</span></div>'}
+ const footer=page.querySelector('.cover-recipient');
+ if(footer)footer.before(el);else page.append(el);
+}
 function transform(){
  if(rendering||!active||mode==='creative')return;
  const zone=document.getElementById('proposalPages');if(!zone)return;
@@ -79,9 +92,10 @@ function updatePageControls(){
  const b=document.getElementById('proposalExportBtn');
  if(b){b.textContent=mode==='brief'?'Exporter le brief interne en PDF':mode==='express'?'Exporter le pitch express en PDF':'Exporter la présentation créative en PDF'}
 }
-function renderMode(){if(mode==='creative'){const {o}=values();originalMount.call(api,o,active.settings,active.save,active.back);return}transform()}
+function renderMode(){if(mode==='creative'){const {o}=values();originalMount.call(api,o,active.settings,active.save,active.back);patchCover();return}transform()}
 function sync(){
  if(rendering||!active)return;
+ if(mode==='creative')patchCover();
  const root=document.getElementById('proposalPages');
  if(!root)return;
  if(root.querySelectorAll(':scope > .pdfpage').length===4){delete root.dataset.wfMode;transform()}
@@ -114,7 +128,7 @@ function setupToolbar(){
 api.mount=function(o,settings,save,back){
  if(observer)observer.disconnect();active={o,settings,save,back};mode='creative';
  originalMount.call(api,o,settings,save,back);
- setupToolbar();updatePageControls();
+ setupToolbar();updatePageControls();patchCover();
  const zone=document.getElementById('proposalPages');
  if(zone){observer=new MutationObserver(sync);observer.observe(zone,{childList:true})}
 };
