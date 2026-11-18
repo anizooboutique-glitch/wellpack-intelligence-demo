@@ -32,6 +32,7 @@ visible=runpy.run_path(str(ROOT/'frontend-release'/'visible_radar_v2.py'))['appl
 repair=runpy.run_path(str(ROOT/'frontend-release'/'home_repair_v3.py'))['apply'](ROOT,assets)
 searchfix=runpy.run_path(str(ROOT/'frontend-release'/'search_reset_v4.py'))['apply'](ROOT,assets)
 searchguard=runpy.run_path(str(ROOT/'frontend-release'/'last_search_guard_v6.py'))['apply'](ROOT,assets)
+gridfix=runpy.run_path(str(ROOT/'frontend-release'/'safe_card_grid_v7.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
 assert len(case_state['ops'])==23 and len(case_state['clients'])==23
 assert len({o['id'] for o in case_state['ops']})==23
@@ -53,6 +54,8 @@ assert 'id="wiResetEverything"' in assets['index.html']
 assert 'function wiClearAllFilters()' in assets['index.html']
 assert 'wiRepairStaleSearch()' in assets['index.html']
 assert 'wiSearchFresh20261118' in assets['index.html']
+assert 'data-wi-rendered-cards' in assets['index.html']
+assert 'safeCardRendering' in gridfix
 assert "$('search')" not in assets['index.html']
 assert '<section class="wi-v2-radar"' not in assets['index.html']
 assert 'id="wiResetEverything"' in assets['index.html']
@@ -61,14 +64,14 @@ assert 'date de vérification' in assets['index.html']
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261118-search-guard-v6','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-grid-safe-v7','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,**gridfix,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
 assert old_health in app_text
 app_text=app_text.replace(old_health,'async def healthz():return '+repr({'ok':True,**release}),1)
 app_path.write_text(app_text,encoding='utf-8')
-print('Frontend ready: distinct search input, stale Intersport URL blocked in the renderer, 23 cases and PDFs.',flush=True)
+print('Frontend ready: full 23 campaign grid, fault-tolerant cards, working PDF access, preserved client data.',flush=True)
 
 with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
     test_password=secrets.token_urlsafe(24)
