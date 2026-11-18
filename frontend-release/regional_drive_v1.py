@@ -11,10 +11,11 @@ def apply(root,assets):
     h=assets['index.html']
     f=Path(root)/'frontend-release'/'regional_drive_data.json'
     entries=json.loads(f.read_text(encoding='utf-8'))['cases']
-    sm=re.search(r'window\.WITestState=(.*?);window\.WITestCases=',h,re.S)
-    mm=re.search(r'window\.WITestCases=(.*?);\s*</script>',h,re.S)
-    assert sm and mm,'Missing editorial collection'
-    state=json.loads(sm.group(1));meta=json.loads(mm.group(1))
+    decoder=json.JSONDecoder()
+    state_pos=h.index('window.WITestState=')+len('window.WITestState=')
+    state,state_len=decoder.raw_decode(h[state_pos:])
+    meta_pos=h.index('window.WITestCases=')+len('window.WITestCases=')
+    meta,meta_len=decoder.raw_decode(h[meta_pos:])
     assert len(entries)==8 and len({c['city'] for c in entries})==8
     for c in entries:
         slug=c['slug'];oid='test-20261118-local-'+slug;cid='test-brand-local-'+slug
@@ -76,9 +77,8 @@ def apply(root,assets):
            'fact':c['fact'],'device':'RCS + LP','rcs':c['rcs'],'lp':c['lp'],
            'target':c['target'],'gate':c['check'],'end':c['end']}
     assert len(state['ops'])==23 and len(state['clients'])==23
-    h=h[:mm.start(1)]+dump(meta)+h[mm.end(1):]
-    sm=re.search(r'window\.WITestState=(.*?);window\.WITestCases=',h,re.S)
-    h=h[:sm.start(1)]+dump(state)+h[sm.end(1):]
+    h=h[:meta_pos]+dump(meta)+h[meta_pos+meta_len:]
+    h=h[:state_pos]+dump(state)+h[state_pos+state_len:]
     # Only update the explanatory demo count; preserve custom names and user edits.
     h=h.replace('15 campagnes à tester : produits, services et promotions.',
       '23 campagnes à tester : produits, services, promotions et commerces locaux.')
