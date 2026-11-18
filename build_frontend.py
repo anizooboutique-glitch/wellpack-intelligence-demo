@@ -34,6 +34,7 @@ searchfix=runpy.run_path(str(ROOT/'frontend-release'/'search_reset_v4.py'))['app
 searchguard=runpy.run_path(str(ROOT/'frontend-release'/'last_search_guard_v6.py'))['apply'](ROOT,assets)
 gridfix=runpy.run_path(str(ROOT/'frontend-release'/'safe_card_grid_v7.py'))['apply'](ROOT,assets)
 premium=runpy.run_path(str(ROOT/'frontend-release'/'premium_rcs_v3.py'))['apply'](ROOT,assets)
+photos=runpy.run_path(str(ROOT/'frontend-release'/'brand_images_v1.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
 assert len(case_state['ops'])==23 and len(case_state['clients'])==23
 assert len({o['id'] for o in case_state['ops']})==23
@@ -58,6 +59,8 @@ assert 'wiSearchFresh20261118' in assets['index.html']
 assert 'data-wi-rendered-cards' in assets['index.html']
 assert 'premium-rcs-v3-script' in assets['index.html']
 assert 'window.WIPremiumRCS' in assets['index.html']
+assert 'brand-image-library-script' in assets['index.html']
+assert 'WIBrandImages' in assets['index.html']
 assert 'safeCardRendering' in gridfix
 assert "$('search')" not in assets['index.html']
 assert '<section class="wi-v2-radar"' not in assets['index.html']
@@ -67,14 +70,14 @@ assert 'date de vérification' in assets['index.html']
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261118-premium-rcs-v3','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,**gridfix,**premium,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-prospect-image-library','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,**searchguard,**gridfix,**premium,**photos,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
 assert old_health in app_text
 app_text=app_text.replace(old_health,'async def healthz():return '+repr({'ok':True,**release}),1)
 app_path.write_text(app_text,encoding='utf-8')
-print('Frontend ready: 23 campaigns, premium brand-specific RCS pitch layouts and PDF exports, existing SMS and LP maintained.',flush=True)
+print('Frontend ready: 23 campaigns, public-site photo picker for RCS/PDF, SMS and LP preserved.',flush=True)
 
 with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
     test_password=secrets.token_urlsafe(24)
@@ -85,6 +88,8 @@ with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
         assert client.get('/healthz').json()['release']==release['release']
         assert client.get('/').status_code==303
         assert client.get('/api/state').status_code==401
+        assert client.post('/api/brand-images/search',json={'website':'https://example.com'}).status_code==401
+        assert client.post('/api/brand-images/import',json={'token':'sampletoken123456'}).status_code==401
         assert client.delete('/api/brands/example').status_code==401
         headers={'X-Wellpack-Request':'local-app','Origin':'https://testserver'}
         assert client.post('/api/login',json={'password':'incorrect'},headers=headers).status_code==401
@@ -95,6 +100,20 @@ with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
             result=client.get('/static/'+name)
             assert result.status_code==200 and result.text==assets[name]
         assert client.get('/static/release.json').json()==release
+        from unittest.mock import patch,AsyncMock
+        fake_search={'images':[{'token':'mockimage12345678','url':'https://example.com/pic.jpg','sourcePage':'https://example.com/','label':'Produit'}],'warnings':[],'sourceCount':1,'rights':'À valider'}
+        fake_import={'imageData':'data:image/jpeg;base64,/9j/','url':'https://example.com/pic.jpg','sourcePage':'https://example.com/','rights':'À valider'}
+        with patch('engine.image_discovery.discover',new_callable=AsyncMock,return_value=fake_search) as discover:
+            result=client.post('/api/brand-images/search',json={'website':'https://example.com/','query':'produit'},headers=headers)
+            assert result.status_code==200 and len(result.json()['images'])==1
+            assert discover.await_count==1
+        with patch('engine.image_discovery.import_image',new_callable=AsyncMock,return_value=fake_import) as imp:
+            result=client.post('/api/brand-images/import',json={'token':'mockimage12345678'},headers=headers)
+            assert result.status_code==200 and result.json()['url']=='https://example.com/pic.jpg'
+            assert imp.await_count==1
+        assert client.post('/api/brand-images/search',json={'website':'http://127.0.0.1/'},headers=headers).status_code==422
+        assert client.post('/api/brand-images/import',json={'token':'bad*'},headers=headers).status_code==422
+
         assert client.get('/api/health').json()['mode']=='rules'
         assert client.post('/api/settings/test',json={},headers=headers).status_code==400
         brand={'id':'delete-smoke','name':'Test suppression','website':''}
@@ -107,4 +126,4 @@ with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
         assert client.delete('/api/brands/delete-smoke',headers=headers).status_code==200
         assert client.post('/api/logout',json={},headers=headers).status_code==200
         assert client.get('/').status_code==303
-print('HTTP smoke tests passed: authentication, 23 presentations with 8 local DTS scenarios, deletion, stale-save rejection, paid API blocked.',flush=True)
+print('HTTP smoke tests passed: authentication, image search/import mocked integration, private URL rejected, 23 campaigns, deletion and no paid API.',flush=True)
