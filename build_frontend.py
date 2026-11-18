@@ -39,7 +39,7 @@ assert all('drive-to-store' in o['notes'] for o in case_state['ops'] if o['id'].
 assert 'proposalExportBtn' in assets['index.html'] and 'window.WIProposal.print()' in assets['index.html']
 assert 'data-remove-brand' in assets['index.html'] and 'data-remove-source' in assets['index.html']
 assert 'Darty — Faire réparer son four avant les fêtes' in assets['index.html']
-assert 'window.WIRCS.render(op,m)' in assets['index.html']
+assert 'window.WIChannels.render(op,m)' in assets['index.html']
 assert 'Personnaliser les cartes RCS' in assets['index.html']
 assert all(k in assets['index.html'] for k in ['id="wiChannel"','id="wiStage"','id="wiPriority"','data-propose-fast','opportunityRank'])
 assert 'reader.readAsDataURL(f)' in assets['index.html']
