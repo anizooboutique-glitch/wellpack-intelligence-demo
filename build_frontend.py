@@ -25,12 +25,15 @@ assert hashlib.sha256(assets['index.html'].encode()).hexdigest() == '317963d7321
 runpy.run_path(str(ROOT/'frontend-release'/'manage_v1.py'))['apply'](ROOT,assets)
 counts=runpy.run_path(str(ROOT/'frontend-release'/'editorial_v2.py'))['apply'](ROOT,assets)
 rcs=runpy.run_path(str(ROOT/'frontend-release'/'rcs_v1.py'))['apply'](ROOT,assets)
+local=runpy.run_path(str(ROOT/'frontend-release'/'regional_drive_v1.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
-assert len(case_state['ops'])==15 and len(case_state['clients'])==15
-assert len({o['id'] for o in case_state['ops']})==15
+assert len(case_state['ops'])==23 and len(case_state['clients'])==23
+assert len({o['id'] for o in case_state['ops']})==23
 assert all(o.get('proposal') and o.get('brief') for o in case_state['ops'])
 assert all(not c.get('website') for c in case_state['clients'])
 assert all(1 <= len(o['creative']['rcs']) <= 4 for o in case_state['ops'])
+assert len([o for o in case_state['ops'] if o['id'].startswith('test-20261118-local-')])==8
+assert all('drive-to-store' in o['notes'] for o in case_state['ops'] if o['id'].startswith('test-20261118-local-'))
 assert 'proposalExportBtn' in assets['index.html'] and 'window.WIProposal.print()' in assets['index.html']
 assert 'data-remove-brand' in assets['index.html'] and 'data-remove-source' in assets['index.html']
 assert 'Darty — Faire réparer son four avant les fêtes' in assets['index.html']
@@ -41,14 +44,14 @@ assert 'reader.readAsDataURL(f)' in assets['index.html']
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261117-branded-rcs','cases':15,'presentations':15,'deletionControls':True,'plainTitles':True,**rcs,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-local-dts','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
 assert old_health in app_text
 app_text=app_text.replace(old_health,'async def healthz():return '+repr({'ok':True,**release}),1)
 app_path.write_text(app_text,encoding='utf-8')
-print('Frontend ready: 15 branded RCS presentations, complete carousels, editable card visuals, four-page PDF export; no paid API.',flush=True)
+print('Frontend ready: 23 cases including eight city-specific DTS opportunities, branded RCS cards and client PDF; no paid API.',flush=True)
 
 with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
     test_password=secrets.token_urlsafe(24)
@@ -81,4 +84,4 @@ with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
         assert client.delete('/api/brands/delete-smoke',headers=headers).status_code==200
         assert client.post('/api/logout',json={},headers=headers).status_code==200
         assert client.get('/').status_code==303
-print('HTTP smoke tests passed: authentication, 15 RCS presentations, deletion, stale-save rejection, paid API blocked.',flush=True)
+print('HTTP smoke tests passed: authentication, 23 presentations with 8 local DTS scenarios, deletion, stale-save rejection, paid API blocked.',flush=True)
