@@ -27,6 +27,7 @@ counts=runpy.run_path(str(ROOT/'frontend-release'/'editorial_v2.py'))['apply'](R
 rcs=runpy.run_path(str(ROOT/'frontend-release'/'rcs_v1.py'))['apply'](ROOT,assets)
 local=runpy.run_path(str(ROOT/'frontend-release'/'regional_drive_v1.py'))['apply'](ROOT,assets)
 phase1=runpy.run_path(str(ROOT/'frontend-release'/'phase1_dashboard.py'))['apply'](ROOT,assets)
+channels=runpy.run_path(str(ROOT/'frontend-release'/'channel_preview_v2.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
 assert len(case_state['ops'])==23 and len(case_state['clients'])==23
 assert len({o['id'] for o in case_state['ops']})==23
@@ -42,18 +43,21 @@ assert 'window.WIRCS.render(op,m)' in assets['index.html']
 assert 'Personnaliser les cartes RCS' in assets['index.html']
 assert all(k in assets['index.html'] for k in ['id="wiChannel"','id="wiStage"','id="wiPriority"','data-propose-fast','opportunityRank'])
 assert 'reader.readAsDataURL(f)' in assets['index.html']
+assert 'window.WIChannels.render(op,m)' in assets['index.html']
+assert 'wi-channel-smsnote' in assets['index.html']
+assert 'date de vérification' in assets['index.html']
 (ROOT/'static').mkdir(exist_ok=True)
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261118-phase1-channels','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-client-channel-previews','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
 assert old_health in app_text
 app_text=app_text.replace(old_health,'async def healthz():return '+repr({'ok':True,**release}),1)
 app_path.write_text(app_text,encoding='utf-8')
-print('Frontend ready: 23 cases including eight city-specific DTS opportunities, branded RCS cards and client PDF; no paid API.',flush=True)
+print('Frontend ready: 23 cases, channel-aware SMS / RCS / LP client PDF, stale-source review; no paid API.',flush=True)
 
 with tempfile.TemporaryDirectory(prefix='wellpack-build-') as data:
     test_password=secrets.token_urlsafe(24)
