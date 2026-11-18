@@ -60,12 +60,12 @@ def apply(root,assets):
           'visualBrief':art,'brandColor':c['color'],
           'approval':{'product':False,'feasibility':False,'editorial':False},
           'whiteLabel':False}
-        op['notes']='CAS DE TEST NON VALIDÉ PAR '+c['brand'].upper()+'.\\n\\n'
-        op['notes']+='OBJECTIF : drive-to-store à '+c['city']+'\\n\\n'
-        op['notes']+='JUSTIFICATION : '+c['why']+'\\n\\n'
-        op['notes']+='SMS : '+c['sms']+'\\n\\n'
-        op['notes']+='MESURE : '+c['kpi']+'\\n\\n'
-        op['notes']+='À VALIDER : '+c['check']+'\\n\\nSOURCES :\\n'+'\\n'.join(v[0]+': '+v[1] for v in c['sources'])
+        op['notes']='CAS DE TEST NON VALIDÉ PAR '+c['brand'].upper()+'.\n\n'
+        op['notes']+='OBJECTIF : drive-to-store à '+c['city']+'\n\n'
+        op['notes']+='JUSTIFICATION : '+c['why']+'\n\n'
+        op['notes']+='SMS : '+c['sms']+'\n\n'
+        op['notes']+='MESURE : '+c['kpi']+'\n\n'
+        op['notes']+='À VALIDER : '+c['check']+'\n\nSOURCES :\n'+'\n'.join(v[0]+': '+v[1] for v in c['sources'])
         state['ops'].append(op)
         state['clients'].append({'id':cid,'name':c['brand'],'sector':c['sector'],
             'routeType':'unknown','partner':'','website':'',
@@ -86,5 +86,20 @@ def apply(root,assets):
       '23 campagnes à tester.<br>Produits, services et commerces locaux.')
     h=h.replace('15 présentations','23 présentations')
     h=h.replace('15 cas','23 cas')
+    # Brand-aware RCS artwork, each aligned to its individual campaign.
+    themes=[
+      ('voisin','#E8CC91','#4A2D24','LYON · FÊTE DES LUMIÈRES',['LE GOÛT|DE LYON','IDÉES|CADEAUX','VENIR|EN BOUTIQUE'],'food'),
+      ('guerlais','#B7D5E2','#104668','NANTES · NOËL',['NOËL|À NEW YORK','IDÉES|CADEAUX','BOUTIQUE|FRANKLIN'],'food'),
+      ('mimosa','#DDE7D3','#465C44','BORDEAUX · ATELIERS',['UNE COURONNE|À CRÉER','UN MOMENT|À PARTAGER','VOTRE|FLEURISTE'],'flowers'),
+      ('skitruck','#CFEAE1','#145649','GRENOBLE · HIVER',['VOTRE|MATÉRIEL','PRÉPAREZ|VOTRE SORTIE','RETRAIT|AU SHOP'],'sport'),
+      ('pillon','#F0D4D9','#61273B','TOULOUSE · GOURMANDISES',['PAPILLOTES|MAISON','À|OFFRIR','AU|CAPITOLE'],'food'),
+      ('bockel','#E7C5B5','#642E28','STRASBOURG · NOËL',['CHOCOLATS|ALSACIENS','PLACE|DU CHÂTEAU','PLACE|KLÉBER'],'food'),
+      ('meert','#E9DDC7','#776142','LILLE · GOURMANDISES',['LES GAUFRES|MÉERT','COFFRETS|À OFFRIR','RUE|ESQUERMOISE'],'food'),
+      ('corvette','#D2E7EE','#185E78','MARSEILLE · SAVON',['UN CADEAU|PERSONNALISÉ','FAIT|SUR PLACE','PLACE|AUX HUILES'],'home')
+    ]
+    # The RCS component keeps its rich cards and print layout; only illustrations change.
+    assert 'const themes=[' in h
+    extra=','.join('['+','.join(json.dumps(v,ensure_ascii=False) for v in t)+']' for t in themes)+','
+    h=h.replace('const themes=[','const themes=['+extra,1)
     assets['index.html']=h
     return {'localDriveCases':8,'cities':8,'allCases':23,'localPDFs':8}
