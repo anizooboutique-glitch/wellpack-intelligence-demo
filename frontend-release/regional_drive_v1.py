@@ -12,7 +12,7 @@ def apply(root,assets):
     f=Path(root)/'frontend-release'/'regional_drive_data.json'
     entries=json.loads(f.read_text(encoding='utf-8'))['cases']
     sm=re.search(r'window\.WITestState=(.*?);window\.WITestCases=',h,re.S)
-    mm=re.search(r'window\.WITestCases=(.*?);\\s*</script>',h,re.S)
+    mm=re.search(r'window\.WITestCases=(.*?);\s*</script>',h,re.S)
     assert sm and mm,'Missing editorial collection'
     state=json.loads(sm.group(1));meta=json.loads(mm.group(1))
     assert len(entries)==8 and len({c['city'] for c in entries})==8
