@@ -8,7 +8,7 @@ const short=(v,n=550)=>{const text=String(v??'').trim();return text.length>n?tex
 const safe=v=>esc(short(v));
 function bar(root){return root?.querySelector('.doc-bar')?.outerHTML||'<div class="doc-bar">WELLPACK · RECOMMANDATION</div>'}
 function foot(n,total,brand){return '<footer class="doc-foot"><span>DOCUMENT DE TRAVAIL · '+safe(brand)+'</span><b>'+String(n).padStart(2,'0')+' / '+String(total).padStart(2,'0')+'</b></footer>'}
-function values(){const m=api.read();const o=active;return {m,o}}
+function values(){const m=api.read();const o=active?.o;return {m,o}}
 function listed(v){return '<div class="wf-value">'+safe(v||'À renseigner')+'</div>'}
 function field(label,value){return '<div class="wf-field"><span>'+esc(label)+'</span>'+listed(value)+'</div>'}
 function sheet(no,total,body,className,reference){
@@ -100,6 +100,32 @@ function sync(){
  if(!root)return;
  if(root.querySelectorAll(':scope > .pdfpage').length===4){delete root.dataset.wfMode;transform()}
 }
+
+function openPhotos(which){
+ if(!active)return;
+ const adjust=document.getElementById('proposalAdjustBtn');
+ const layout=document.querySelector('.proposal-layout');
+ if(layout?.classList.contains('is-review')&&adjust)adjust.click();
+ const target=which==='site'?'.wi-image-discovery':'.rx-editor';
+ const find=()=>{
+   const details=document.querySelector('#proposalForm '+target);
+   if(!details)return false;
+   details.open=true;
+   const form=document.getElementById('proposalForm');
+   if(form)form.scrollIntoView({behavior:'smooth',block:'start'});
+   details.scrollIntoView({behavior:'smooth',block:'center'});
+   if(which==='local'){
+     const input=details.querySelector('[data-rx-upload]');
+     if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus()}
+   }else{
+     const button=details.querySelector('.wi-image-find');
+     if(button)button.focus();
+   }
+   return true;
+ };
+ if(!find())window.setTimeout(()=>{if(!find())window.alert('Ouvrez le formulaire de la campagne RCS pour ajouter les photos.')},80);
+}
+
 function setupToolbar(){
  const anchor=document.querySelector('.proposal-preview-zone');if(!anchor)return;
  let bar=document.getElementById('wiDeckFormats');
@@ -110,7 +136,8 @@ function setupToolbar(){
  ['express','Pitch express','2 pages · premier contact'],
  ['brief','Brief opérationnel','2 pages · équipes internes']
  ].map(([id,title,subtitle])=>'<button type="button" data-wf-mode="'+id+'" aria-pressed="'+String(mode===id)+'"><b>'+title+'</b><span>'+subtitle+'</span></button>').join('')+'</div>'+
- '<p class="wf-mode-note">Les offres et les visuels restent à valider. Les formats partagent les mêmes données : aucune nouvelle campagne créée.</p>';
+ '<div class="wf-image-shortcuts"><button type="button" data-wf-photo="local">📷 Importer une photo</button><button type="button" data-wf-photo="site">🔎 Photos du site prospect</button><span>Modifiez les visuels avant de générer le PDF.</span></div><p class="wf-mode-note">Les offres et les visuels restent à valider. Les formats partagent les mêmes données : aucune nouvelle campagne créée.</p>';
+ bar.querySelectorAll('[data-wf-photo]').forEach(b=>b.onclick=()=>openPhotos(b.dataset.wfPhoto));
  bar.querySelectorAll('[data-wf-mode]').forEach(b=>b.onclick=()=>{
    const next=b.dataset.wfMode;if(next===mode)return;
    mode=next;
