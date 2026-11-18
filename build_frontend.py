@@ -30,6 +30,7 @@ phase1=runpy.run_path(str(ROOT/'frontend-release'/'phase1_dashboard.py'))['apply
 channels=runpy.run_path(str(ROOT/'frontend-release'/'channel_preview_v2.py'))['apply'](ROOT,assets)
 visible=runpy.run_path(str(ROOT/'frontend-release'/'visible_radar_v2.py'))['apply'](ROOT,assets)
 repair=runpy.run_path(str(ROOT/'frontend-release'/'home_repair_v3.py'))['apply'](ROOT,assets)
+searchfix=runpy.run_path(str(ROOT/'frontend-release'/'search_reset_v4.py'))['apply'](ROOT,assets)
 case_state=json.loads(re.search(r'window\.WITestState=(.*?);window\.WITestCases=',assets['index.html'],re.S).group(1))
 assert len(case_state['ops'])==23 and len(case_state['clients'])==23
 assert len({o['id'] for o in case_state['ops']})==23
@@ -48,6 +49,8 @@ assert 'reader.readAsDataURL(f)' in assets['index.html']
 assert 'window.WIChannels.render(op,m)' in assets['index.html']
 assert 'wi-channel-smsnote' in assets['index.html']
 assert 'id="wiResetEverything"' in assets['index.html']
+assert 'function wiClearAllFilters()' in assets['index.html']
+assert 'wiRepairStaleSearch()' in assets['index.html']
 assert '<section class="wi-v2-radar"' not in assets['index.html']
 assert 'id="wiResetEverything"' in assets['index.html']
 assert 'date de vérification' in assets['index.html']
@@ -55,7 +58,7 @@ assert 'date de vérification' in assets['index.html']
 for name,content in assets.items():
     assert isinstance(content,str)
     (ROOT/'static'/name).write_text(content,encoding='utf-8')
-release={'release':'20261118-dashboard-home-repair','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
+release={'release':'20261118-intersport-search-reset','cases':23,'presentations':23,'deletionControls':True,'plainTitles':True,**rcs,**local,**phase1,**channels,**visible,**repair,**searchfix,'frontendSha256':hashlib.sha256(assets['index.html'].encode()).hexdigest()}
 (ROOT/'static'/'release.json').write_text(json.dumps(release),encoding='utf-8')
 app_path=ROOT/'app.py';app_text=app_path.read_text(encoding='utf-8')
 old_health="async def healthz():return {'ok':True}"
