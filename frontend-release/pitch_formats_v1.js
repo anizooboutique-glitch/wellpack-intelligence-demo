@@ -60,12 +60,22 @@ function transform(){
    updatePageControls();
  }finally{rendering=false}
 }
+function selectPage(index){
+ const pages=[...document.querySelectorAll('#proposalPages > .pdfpage')];
+ pages.forEach((p,i)=>p.classList.toggle('is-current',i===index));
+ document.querySelectorAll('#pdfPageNav [data-wf-page]').forEach((b,i)=>{b.classList.toggle('active',i===index);b.setAttribute('aria-selected',String(i===index))});
+ const label=document.getElementById('pdfPageLabel');if(label)label.textContent='Page '+(index+1)+' / '+pages.length+(mode==='brief'?' · brief interne':' · pitch express');
+}
 function updatePageControls(){
  const nav=document.getElementById('pdfPageNav'),label=document.getElementById('pdfPageLabel'),heading=document.querySelector('.preview-heading h3');
- if(nav)nav.hidden=mode!=='creative';
- if(label)label.textContent=mode==='express'?'2 pages · aperçu express':mode==='brief'?'2 pages · document interne':'4 pages · présentation créative';
+ if(nav&&mode!=='creative'){
+   nav.hidden=false;
+   nav.innerHTML=(mode==='express'?['Couverture','Expérience client']:['Cadrage','Production & contrôles']).map((name,i)=>'<button type="button" data-wf-page="'+i+'" class="'+(i===0?'active':'')+'">'+String(i+1).padStart(2,'0')+' <span>'+name+'</span></button>').join('');
+   nav.querySelectorAll('[data-wf-page]').forEach(b=>b.onclick=()=>selectPage(Number(b.dataset.wfPage)));
+ }else if(nav)nav.hidden=false;
+ if(label)label.textContent=mode==='express'?'Page 1 / 2 · pitch express':mode==='brief'?'Page 1 / 2 · document interne':'Page 1 / 4 · présentation créative';
  if(heading)heading.textContent=mode==='express'?'Pitch commercial express':mode==='brief'?'Brief opérationnel interne':'Le document prospect';
- document.querySelectorAll('#proposalPages > .pdfpage').forEach(p=>p.classList.add('is-current'));
+ if(mode!=='creative')selectPage(0);
  const b=document.getElementById('proposalExportBtn');
  if(b){b.textContent=mode==='brief'?'Exporter le brief interne en PDF':mode==='express'?'Exporter le pitch express en PDF':'Exporter la présentation créative en PDF'}
 }
