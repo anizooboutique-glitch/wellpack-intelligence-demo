@@ -1,0 +1,514 @@
+{
+  "updated": "2026-11-18",
+  "status": "editorial_test_unapproved",
+  "cases": [
+    {
+      "slug": "voisin-lyon",
+      "brand": "Chocolats Voisin",
+      "city": "Lyon",
+      "location": "38 rue Victor Hugo, 69002 Lyon",
+      "sector": "food",
+      "color": "#62402f",
+      "start": "2026-12-01",
+      "end": "2026-12-08",
+      "title": "Voisin Lyon — Faire découvrir les spécialités lyonnaises avant la Fête des Lumières",
+      "product": "Coussins de Lyon, papillotes et coffrets de spécialités",
+      "benefit": "Une adresse locale pour un cadeau gourmand ou une spécialité à partager",
+      "moment": "Fête des Lumières du 5 au 8 décembre 2026",
+      "fact": "La Fête des Lumières est programmée du 5 au 8 décembre 2026 ; Voisin vend les papillotes et spécialités de Lyon, avec une boutique au 38 rue Victor Hugo.",
+      "why": "Activer les riverains et visiteurs avant les soirées de la fête. Les boutiques peuvent fermer avant les illuminations : ne jamais promettre un retrait nocturne.",
+      "pitch": "Une campagne RCS géolocalisée avec trois cartes : spécialités lyonnaises, chocolats de fête et adresse Victor Hugo. On propose une découverte en boutique AVANT la soirée, sans remise artificielle.",
+      "sms": "Voisin Lyon : avant la Fête des Lumières, découvrez nos spécialités et chocolats de fête au 38 rue Victor Hugo. Infos : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Le goût de Lyon",
+          "Coussins de Lyon et confiseries emblématiques à découvrir en boutique.",
+          "Voir les spécialités"
+        ],
+        [
+          "Pour les fêtes",
+          "Papillotes et coffrets gourmands à choisir selon vos envies.",
+          "Découvrir la sélection"
+        ],
+        [
+          "Victor Hugo",
+          "38 rue Victor Hugo, Lyon 2e. Vérifiez les horaires avant de venir.",
+          "Voir l'itinéraire"
+        ]
+      ],
+      "lp": [
+        [
+          "La sélection lyonnaise",
+          "Deux ou trois références réellement disponibles en boutique, avec visuels officiels."
+        ],
+        [
+          "Préparer sa visite",
+          "Adresse, horaires spéciaux du 5 au 8 décembre et station de transport."
+        ],
+        [
+          "Se rendre en boutique",
+          "Itinéraire vers le 38 rue Victor Hugo, sans promettre d'ouverture en soirée."
+        ]
+      ],
+      "target": "Base opt-in géolocalisée autour de Lyon 2e / Presqu'île ; éviter toute inférence sur présence à l'événement.",
+      "kpi": "Visites en boutique mesurées si dispositif DTS disponible ; sinon clics itinéraire et demandes d'horaires, sans les assimiler à des visites.",
+      "check": "Confirmer disponibilité des coffrets, horaires exceptionnels et droits sur les photos.",
+      "sources": [
+        [
+          "Produits Voisin",
+          "https://www.chocolats-voisin.fr/31-assortiment-specialites-de-lyon"
+        ],
+        [
+          "Boutiques Voisin",
+          "https://www.chocolats-voisin.fr/magasins"
+        ],
+        [
+          "Fête des Lumières 2026",
+          "https://www.fetedeslumieres.lyon.fr/fr/page/horaires-et-dates-fete-des-lumieres-2026"
+        ]
+      ]
+    },
+    {
+      "slug": "guerlais-nantes",
+      "brand": "Vincent Guerlais",
+      "city": "Nantes",
+      "location": "11 rue Franklin, 44000 Nantes",
+      "sector": "food",
+      "color": "#0e4364",
+      "start": "2026-11-23",
+      "end": "2026-12-12",
+      "title": "Vincent Guerlais Nantes — Faire venir en boutique pour la collection Noël à New York",
+      "product": "Collection Noël à New York : coffrets, crackers et créations chocolatées",
+      "benefit": "Choisir sur place des cadeaux gourmands pour différents budgets",
+      "moment": "Collection festive Noël 2026 annoncée sur le site officiel",
+      "fact": "La Maison Guerlais présente sa collection Noël à New York, notamment crackers, coffrets et chocolats, et exploite une boutique au 11 rue Franklin.",
+      "why": "Le thème New York offre un vrai territoire créatif ; le RCS fait découvrir plusieurs types de cadeaux avant le déplacement.",
+      "pitch": "Une mini-visite de la collection en trois cartes, puis bouton « Voir la boutique Franklin ». Aucun produit annoncé en retrait sans confirmation de disponibilité.",
+      "sms": "Vincent Guerlais Nantes : Noël prend des airs de New York ! Coffrets et créations gourmandes à découvrir rue Franklin. Infos : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Noël à New York",
+          "Découvrez l'univers 2026 de Vincent Guerlais et ses créations gourmandes.",
+          "Voir la collection"
+        ],
+        [
+          "Des cadeaux à choisir",
+          "Crackers, chocolats et coffrets : différentes attentions à découvrir.",
+          "Voir les idées cadeaux"
+        ],
+        [
+          "Boutique Franklin",
+          "Retrouvez la Maison au 11 rue Franklin, au cœur de Nantes.",
+          "Préparer ma visite"
+        ]
+      ],
+      "lp": [
+        [
+          "Noël à New York",
+          "Héros visuel officiel de la collection et choix entre deux ou trois familles de produits."
+        ],
+        [
+          "Trouver son cadeau",
+          "Cartes par format, renvoyant vers les références du catalogue, sans faux stocks."
+        ],
+        [
+          "Boutique Franklin",
+          "Adresse, horaires confirmés et itinéraire ; retrait seulement si confirmé."
+        ]
+      ],
+      "target": "Contacts opt-in à Nantes et première couronne ; segmentation cadeau gourmands uniquement si intérêt documenté.",
+      "kpi": "Visites attribuables ou, en pilote, clics vers adresse et fiche de collection.",
+      "check": "Valider les références présentes au magasin Franklin et les possibilités de réservation/retrait.",
+      "sources": [
+        [
+          "Collection fêtes",
+          "https://www.vincentguerlais.com/fr/taxons/collection-des-fetes"
+        ],
+        [
+          "Boutiques Guerlais",
+          "https://www.vincentguerlais.com/fr/nos-boutiques"
+        ]
+      ]
+    },
+    {
+      "slug": "mimosa-bordeaux",
+      "brand": "Mimosa Fleuriste",
+      "city": "Bordeaux",
+      "location": "35 rue des Frères Bonie, 33000 Bordeaux",
+      "sector": "other",
+      "color": "#61765a",
+      "start": "2026-11-23",
+      "end": "2026-12-12",
+      "title": "Mimosa Bordeaux — Faire demander un atelier couronne de Noël",
+      "product": "Ateliers de couronnes de Noël et créations florales de saison",
+      "benefit": "Préparer une activité créative de groupe et venir rencontrer une fleuriste locale",
+      "moment": "Préparation des décorations de Noël et événements de groupe en novembre-décembre",
+      "fact": "Mimosa propose des ateliers saisonniers, notamment des couronnes de Noël, sur demande, et dispose d'une boutique rue des Frères Bonie.",
+      "why": "La boutique offre une véritable expérience locale. Il faut vendre une demande de renseignement, pas annoncer des dates ou créneaux imaginaires.",
+      "pitch": "Cibler localement les personnes ayant consenti aux messages ; RCS en trois cartes : l'atelier, l'ambiance, le contact pour connaître les disponibilités. LP courte de prise de contact, sans fausse réservation.",
+      "sms": "Mimosa Bordeaux : envie de créer une couronne de Noël ? Découvrez nos ateliers sur demande rue des Frères Bonie : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Créez votre couronne",
+          "Découvrez l'atelier de saison proposé sur demande par Mimosa.",
+          "Découvrir l'atelier"
+        ],
+        [
+          "Un moment à partager",
+          "En petit groupe, en famille ou entre collègues : demandez les modalités.",
+          "Demander les modalités"
+        ],
+        [
+          "Chez Mimosa",
+          "35 rue des Frères Bonie, Bordeaux. Contactez la boutique pour organiser votre atelier.",
+          "Contacter la boutique"
+        ]
+      ],
+      "lp": [
+        [
+          "L'atelier",
+          "Photos authentiques de créations et durée/prix seulement s'ils sont confirmés."
+        ],
+        [
+          "Votre groupe",
+          "Formulaire simple : nombre de participants, dates souhaitées, contact avec consentement."
+        ],
+        [
+          "Venir à Mimosa",
+          "Adresse et itinéraire, sans affirmer qu'un créneau est déjà réservé."
+        ]
+      ],
+      "target": "Opt-in Bordeaux centre et quartiers proches, éventuellement entreprises locales avec cadre B2B distinct.",
+      "kpi": "Demandes d'ateliers qualifiées puis réservations confirmées ; éviter de mesurer uniquement les clics.",
+      "check": "Dates réellement disponibles, capacité, prix, âge minimum éventuel et validation du formulaire.",
+      "sources": [
+        [
+          "Ateliers Mimosa",
+          "https://lemimosa.fr/ateliers/"
+        ],
+        [
+          "Boutique Mimosa",
+          "https://lemimosa.fr/contact/"
+        ]
+      ]
+    },
+    {
+      "slug": "skitruck-grenoble",
+      "brand": "SkiTruck",
+      "city": "Grenoble",
+      "location": "101 cours Jean Jaurès, 38000 Grenoble",
+      "sector": "sport",
+      "color": "#12675f",
+      "start": "2026-11-23",
+      "end": "2026-12-20",
+      "title": "SkiTruck Grenoble — Générer des réservations de matériel de ski à retirer en magasin",
+      "product": "Location de skis, snowboards, raquettes et entretien de matériel",
+      "benefit": "Réserver l'équipement adapté avant le départ, puis le récupérer en boutique",
+      "moment": "Préparation de la saison hivernale et des départs à la montagne",
+      "fact": "SkiTruck propose location, vente et entretien de matériel de ski ; réservation en ligne avec choix des dates ; retrait au shop de Grenoble.",
+      "why": "Le service de réservation répond à une tension concrète : anticiper son équipement. Le climat ou l'enneigement ne sont pas supposés connus.",
+      "pitch": "Un RCS avec choix « Louer / Entretenir / Venir au magasin », renvoi immédiat vers le parcours de réservation officiel et rappel de retrait local.",
+      "sms": "SkiTruck Grenoble : ski, snowboard ou raquettes cet hiver ? Réservez votre matériel et préparez le retrait au 101 cours Jean Jaurès : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Votre sortie se prépare",
+          "Skis, snowboards ou raquettes : choisissez l'équipement adapté à votre séjour.",
+          "Réserver en ligne"
+        ],
+        [
+          "Du matériel à entretenir ?",
+          "Découvrez aussi le service atelier pour préparer votre matériel.",
+          "Voir l'atelier"
+        ],
+        [
+          "Retrait à Grenoble",
+          "101 cours Jean Jaurès. Consultez les horaires et les conditions de retrait.",
+          "Voir le magasin"
+        ]
+      ],
+      "lp": [
+        [
+          "Quel est votre besoin ?",
+          "Trois entrées : location ski/snowboard, raquettes, atelier."
+        ],
+        [
+          "Dates et matériel",
+          "Lien vers la réservation officielle ; tarifs et stocks affichés par le système SkiTruck."
+        ],
+        [
+          "Retrait au shop",
+          "Adresse, horaires d'hiver vérifiés, itinéraire et règles de retrait."
+        ]
+      ],
+      "target": "Contacts opt-in autour de Grenoble et agglomération, sans déduire qu'ils pratiquent le ski d'après leur localisation.",
+      "kpi": "Réservations confirmées pour retrait en magasin / messages délivrés ; clics itinéraire secondaires.",
+      "check": "Réservation active, stocks, conditions de retrait et horaires saisonniers.",
+      "sources": [
+        [
+          "SkiTruck location",
+          "https://skitruck.fr/location"
+        ],
+        [
+          "Magasin Grenoble",
+          "https://skitruck.fr/le-magasin-de-grenoble"
+        ]
+      ]
+    },
+    {
+      "slug": "pillon-toulouse",
+      "brand": "Maison Pillon",
+      "city": "Toulouse",
+      "location": "3 place du Capitole, 31000 Toulouse",
+      "sector": "food",
+      "color": "#6c2943",
+      "start": "2026-11-23",
+      "end": "2026-12-15",
+      "title": "Maison Pillon Toulouse — Attirer en boutique pour les spécialités de Noël",
+      "product": "Papillotes maison, marrons glacés, ballotins de chocolats",
+      "benefit": "Composer un cadeau gourmand local et découvrir les formats disponibles",
+      "moment": "Préparation des cadeaux et gourmandises de Noël 2026",
+      "fact": "Maison Pillon présente papillotes maison, marrons glacés, ballotins de chocolats ; boutique au 3 place du Capitole à Toulouse.",
+      "why": "Plusieurs budgets et formats peuvent être présentés dans une activation multi-produits sans inventer de remise.",
+      "pitch": "RCS catalogue court, trois familles de produits avec CTA vers les adresses de magasins ; possibilité de privilégier la boutique Capitole.",
+      "sms": "Maison Pillon Toulouse : papillotes, marrons glacés et coffrets de Noël à découvrir dans nos boutiques. Adresse et sélection : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Les papillotes maison",
+          "La Maison Pillon fabrique elle-même ses papillotes pralinées.",
+          "Voir les papillotes"
+        ],
+        [
+          "Pour offrir",
+          "Marrons glacés et ballotins à choisir selon l'occasion.",
+          "Voir les gourmandises"
+        ],
+        [
+          "Au Capitole",
+          "Rendez-vous au 3 place du Capitole à Toulouse pour découvrir la sélection.",
+          "Voir l'itinéraire"
+        ]
+      ],
+      "lp": [
+        [
+          "Les gourmandises de saison",
+          "Trois entrées produits, avec photos et descriptifs officiels."
+        ],
+        [
+          "Choisir son format",
+          "Disponibilités et formats à reconfirmer ; pas de promesse de coffret personnalisé."
+        ],
+        [
+          "Boutique Capitole",
+          "Carte et horaires confirmés."
+        ]
+      ],
+      "target": "Contact opt-in géociblé Toulouse centre / proximité boutiques Pillon, limitation pression commerciale.",
+      "kpi": "Visites boutique attribuables ou clics itinéraire; ventes en magasin si mesure fiable disponible.",
+      "check": "Produits réellement présents à Capitole et horaires fête, absence de commande de ballotin sur mesure pendant fêtes.",
+      "sources": [
+        [
+          "Gamme Noël",
+          "https://www.maison-pillon.fr/98-en-attendant-noel"
+        ],
+        [
+          "Boutiques Pillon",
+          "https://www.maison-pillon.fr/boutiques"
+        ]
+      ]
+    },
+    {
+      "slug": "bockel-strasbourg",
+      "brand": "Jacques Bockel",
+      "city": "Strasbourg",
+      "location": "Place du Château et place Kléber, 67000 Strasbourg",
+      "sector": "food",
+      "color": "#70352d",
+      "start": "2026-11-27",
+      "end": "2026-12-20",
+      "title": "Jacques Bockel Strasbourg — Diriger vers les stands de Noël et leurs chocolats",
+      "product": "Coffrets de chocolat de Noël et spécialités alsaciennes",
+      "benefit": "Retrouver l'artisan au marché de Noël et choisir sur place un cadeau gourmand",
+      "moment": "Marchés de Noël de Strasbourg du 27 novembre au 24 décembre 2026",
+      "fact": "Jacques Bockel annonce sa présence aux marchés de Noël de Strasbourg, places du Château et Kléber ; sa collection inclut des coffrets de Noël.",
+      "why": "C'est une opération drive-to-market documentée, mais la destination est un stand temporaire, pas une boutique permanente.",
+      "pitch": "Campagne locale avant le week-end d'ouverture : RCS produits + deux emplacements officiels des stands. LP itinéraire et horaires de marché, vérifiés.",
+      "sms": "Jacques Bockel : retrouvez nos chocolats de Noël sur les marchés de Strasbourg, places du Château et Kléber. Infos : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Les chocolats de Noël",
+          "Coffrets et créations alsaciennes à découvrir pendant les fêtes.",
+          "Voir les créations"
+        ],
+        [
+          "Place du Château",
+          "Retrouvez la Maison Jacques Bockel sur le marché de Noël.",
+          "Voir l'emplacement"
+        ],
+        [
+          "Place Kléber",
+          "Un second point de rencontre indiqué par la Maison pour 2026.",
+          "Préparer sa visite"
+        ]
+      ],
+      "lp": [
+        [
+          "Les produits des fêtes",
+          "Coffrets de Noël issus du catalogue, photos officielles uniquement."
+        ],
+        [
+          "Deux emplacements",
+          "Carte des stands Château/Kléber et accès piétons."
+        ],
+        [
+          "Les horaires",
+          "Dates officielles des marchés ; éviter de garantir des stocks par stand."
+        ]
+      ],
+      "target": "Opt-in Strasbourg et visiteurs intéressés par sorties/cadeaux si cette intention est effectivement déclarée.",
+      "kpi": "Visites mesurées sur le périmètre des stands si autorisé ; sinon clics vers carte/horaires.",
+      "check": "Emplacements exacts, horaires de présence, disponibilité par stand et contraintes de géociblage.",
+      "sources": [
+        [
+          "Présence aux marchés 2026",
+          "https://www.chocolats.alsace/content/80-agenda-marches-noel-2026"
+        ],
+        [
+          "Produits Noël",
+          "https://www.chocolats.alsace/216-noel-en-magasin"
+        ],
+        [
+          "Dates marchés de Strasbourg",
+          "https://noel.strasbourg.eu/foire-aux-questions/"
+        ]
+      ]
+    },
+    {
+      "slug": "meert-lille",
+      "brand": "Méert",
+      "city": "Lille",
+      "location": "27 rue Esquermoise, 59000 Lille",
+      "sector": "food",
+      "color": "#796134",
+      "start": "2026-12-01",
+      "end": "2026-12-20",
+      "title": "Méert Lille — Faire découvrir les coffrets et gaufres à offrir pour Noël",
+      "product": "Gaufres Méert, confiseries et coffrets cadeaux de Noël",
+      "benefit": "Composer un cadeau emblématique de Lille à deux pas du Village de Noël",
+      "moment": "Village de Noël de Lille ouvert du 18 novembre au 30 décembre 2026",
+      "fact": "Méert vend gaufres et confiseries au 27 rue Esquermoise ; catalogue Noël 2026 avec coffrets, certains annoncés disponibles dès le 1er décembre.",
+      "why": "Le Village de Noël crée une occasion locale de découverte ; le contenu ne présume pas d'une promotion.",
+      "pitch": "RCS centré sur le cadeau gourmand et le magasin historique, avec destination itinéraire ; ciblage local avant le week-end, pas de fausse remise.",
+      "sms": "Méert Lille : pour vos cadeaux de Noël, découvrez nos gaufres et coffrets gourmands au 27 rue Esquermoise. Infos : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Les gaufres Méert",
+          "Un classique lillois à retrouver dans notre boutique historique.",
+          "Voir les gaufres"
+        ],
+        [
+          "Pour offrir",
+          "Coffrets et confiseries de Noël à choisir selon l'envie.",
+          "Voir les coffrets"
+        ],
+        [
+          "Rue Esquermoise",
+          "27 rue Esquermoise, à quelques minutes de la place Rihour.",
+          "Voir l'itinéraire"
+        ]
+      ],
+      "lp": [
+        [
+          "Une sélection à offrir",
+          "Gaufres et coffrets Noël 2026 ; assortiments disponibles à contrôler."
+        ],
+        [
+          "Préparer son passage",
+          "Adresse et itinéraire depuis place Rihour, distance indicative non chiffrée."
+        ],
+        [
+          "Horaires et stocks",
+          "Horaires officiels de la boutique, disponibilité des coffrets à confirmer."
+        ]
+      ],
+      "target": "Contacts opt-in Lille centre et quartiers reliés au centre, sans prétendre cibler les visiteurs du marché en temps réel.",
+      "kpi": "Visites magasin attribuables / messages délivrés ; clics itinéraire complémentaires.",
+      "check": "Stock coffrets après le 1er décembre, droits visuels et éventuels horaires exceptionnels.",
+      "sources": [
+        [
+          "Boutique Méert Lille",
+          "https://www.meert.fr/fr/magasins"
+        ],
+        [
+          "Catalogue Noël 2026",
+          "https://fliphtml5.com/Meert1677/Catalogue_Noel_2026/"
+        ],
+        [
+          "Village Noël Lille",
+          "https://www.lille.fr/Actualites/Village-de-Noel-de-Lille-2026"
+        ]
+      ]
+    },
+    {
+      "slug": "corvette-marseille",
+      "brand": "La Corvette",
+      "city": "Marseille",
+      "location": "28 place aux Huiles, 13001 Marseille",
+      "sector": "home",
+      "color": "#185e78",
+      "start": "2026-11-26",
+      "end": "2026-12-20",
+      "title": "La Corvette Marseille — Attirer en boutique pour personnaliser un savon cadeau",
+      "product": "Savon de Marseille découpé et personnalisé en boutique",
+      "benefit": "Repartir avec un petit cadeau personnalisé, fabriqué sur place",
+      "moment": "Recherche de petits cadeaux originaux avant Noël",
+      "fact": "La boutique La Corvette du Vieux-Port propose la personnalisation d'une tranche de savon sans réservation ; adresse 28 place aux Huiles.",
+      "why": "Un service de personnalisation réel, difficile à mettre en valeur par un simple SMS, justifie une démonstration RCS et un CTA itinéraire.",
+      "pitch": "RCS en trois cartes (le geste, le résultat, la boutique) avec court parcours LP indiquant personnalisation en boutique sans réservation selon les conditions officielles.",
+      "sms": "La Corvette Marseille : un cadeau personnalisé ? Faites graver votre tranche de savon en boutique, 28 place aux Huiles. Infos : {LIEN} {STOP}",
+      "rcs": [
+        [
+          "Un savon à personnaliser",
+          "Choisissez un mot, un prénom ou une attention sur une tranche de savon.",
+          "Voir le principe"
+        ],
+        [
+          "Réalisé sur place",
+          "La personnalisation est proposée en boutique, sans réservation selon le site.",
+          "Découvrir le service"
+        ],
+        [
+          "Au Vieux-Port",
+          "28 place aux Huiles, Marseille 1er. Consultez les horaires avant de venir.",
+          "Voir l'itinéraire"
+        ]
+      ],
+      "lp": [
+        [
+          "Le geste",
+          "Photographie officielle du savon personnalisé, sans fabriquer un rendu mensonger."
+        ],
+        [
+          "Comment ça marche",
+          "Découpe et personnalisation en boutique ; modalités et tarif à vérifier."
+        ],
+        [
+          "Venir sur place",
+          "Plan Vieux-Port, horaires et accès métro."
+        ]
+      ],
+      "target": "Opt-in Marseille centre et zones proches ; segments cadeaux uniquement si intérêt déclaré.",
+      "kpi": "Visites au point de vente attribuables ou interactions itinéraire et consultation du service.",
+      "check": "Prix, personnalisation réellement disponible, files d'attente et horaires fêtes.",
+      "sources": [
+        [
+          "Personnalisation boutique",
+          "https://www.la-corvette.com/boutique-place-aux-huiles-la-corvette/"
+        ],
+        [
+          "Adresses La Corvette",
+          "https://www.la-corvette.com/points-de-vente/"
+        ]
+      ]
+    }
+  ]
+}
