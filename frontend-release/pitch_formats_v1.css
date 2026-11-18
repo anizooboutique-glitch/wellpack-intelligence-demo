@@ -35,3 +35,9 @@
 .wf-cover-art>span{position:absolute;left:17px;top:30px;font-size:22px;font-weight:950;line-height:1.1;letter-spacing:-1px;max-width:170px;color:#232524}
 .doc-cover .cover-offer,.doc-cover .cover-path,.doc-cover .cover-recipient{position:relative;z-index:2}
 @media print{.wf-cover-visual{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}}
+
+.wf-image-shortcuts{display:flex;flex-wrap:wrap;align-items:center;gap:9px;border-top:1px solid #ebe8dc;padding-top:12px}
+.wf-image-shortcuts button{background:#242928;color:#fff;border:0;border-radius:8px;padding:10px 13px;font-size:11px;font-weight:850;cursor:pointer}
+.wf-image-shortcuts button:nth-child(2){background:#f4df51;color:#202426}
+.wf-image-shortcuts span{font-size:10px;color:#667071}
+.wf-image-shortcuts button:focus-visible{outline:3px solid #3785fc;outline-offset:3px}
