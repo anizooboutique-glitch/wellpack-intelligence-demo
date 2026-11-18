@@ -1,0 +1,34 @@
+/* Client-facing channel preview, A4-friendly in the existing PDF layout */
+.wi-channel-experience{font-family:Arial,Helvetica,sans-serif;color:#1f2529;width:100%;min-height:0}
+.wi-channel-header{display:flex;align-items:center;justify-content:space-between;font-size:9px;letter-spacing:1.5px;color:#666;border-bottom:1px solid #dedede;padding:0 0 12px}
+.wi-channel-header b{background:#181818;color:#fff;border-radius:5px;padding:7px 11px;font-size:10px;letter-spacing:.2px}
+.wi-channel-experience h2{font-size:34px!important;line-height:1.04!important;letter-spacing:-1px!important;margin:16px 0 9px!important;max-width:95%}
+.wi-channel-intro{font-size:11px!important;margin:0 0 18px!important;color:#646464!important}
+.wi-channel-flow{display:grid;grid-template-columns:235px 34px 1fr;align-items:center;gap:10px;min-height:435px}
+.wi-channel-handset{position:relative;background:#f8f8f8;border:7px solid #22272c;border-radius:29px;min-height:415px;box-shadow:0 13px 23px #00000011;overflow:hidden}
+.wi-channel-status{padding:12px 16px 8px;color:#353535;font-size:9px;font-weight:700;display:flex;justify-content:space-between}
+.wi-channel-agent{display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e6e6e6;padding:12px 13px;min-height:28px;font-size:11px}
+.wi-channel-agent strong{font-weight:800;max-width:160px;overflow-wrap:anywhere;text-align:center}
+.wi-channel-day{text-align:center;color:#858585;font-size:8px;margin:20px 0 13px}
+.wi-channel-bubble{font-size:12px;color:#202020;background:#e8e8ed;padding:13px 12px;margin:0 13px 12px;border-radius:15px 15px 15px 4px;overflow-wrap:anywhere;line-height:1.55}
+.wi-channel-smsnote{font-size:8px;line-height:1.4;color:#777;margin:0 17px}
+.wi-channel-composer{position:absolute;bottom:0;background:#fff;border-top:1px solid #e3e3e3;width:100%;box-sizing:border-box;padding:14px;font-size:9px;color:#8b8b8b;display:flex;justify-content:space-between}
+.wi-channel-arrow{text-align:center;font-size:24px;color:#606060}
+.wi-channel-landing{align-self:stretch;max-height:440px;border:1px solid #e1e1e1;border-radius:17px;background:#fff;box-shadow:0 9px 18px #0000000b;overflow:hidden}
+.wi-channel-browser{background:#f6f6f6;font-size:9px;color:#555;display:flex;align-items:center;gap:15px;padding:12px 14px}
+.wi-channel-browser span{color:#bbb;letter-spacing:3px}
+.wi-channel-hero{background:linear-gradient(145deg,var(--wi-channel-accent),#f6f6e7);color:#212121;min-height:140px;padding:25px 19px 16px;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.wi-channel-hero span{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase}
+.wi-channel-hero strong{font-size:22px;line-height:1.15;letter-spacing:-.4px;overflow-wrap:anywhere}
+.wi-channel-hero small{font-size:8px;color:#333}
+.wi-channel-copy{padding:19px 17px}
+.wi-channel-copy>span{color:#666;font-size:8px;font-weight:bold;letter-spacing:1px}
+.wi-channel-copy h3{font-size:17px!important;margin:8px 0!important}
+.wi-channel-copy p{font-size:11px!important;line-height:1.5!important;margin:5px 0 15px!important}
+.wi-channel-cta{display:flex;align-items:center;justify-content:space-between;background:#1e1e1e;color:#fff;border-radius:8px;font-size:10px;font-weight:700;padding:13px;margin-bottom:12px}
+.wi-channel-copy small{font-size:9px;line-height:1.4;color:#777}
+.wi-channel-takeaway{display:grid;grid-template-columns:1.4fr 1fr;gap:17px;margin:18px 0 14px;border-top:1px solid #e6e6e6;padding-top:16px}
+.wi-channel-takeaway b{font-size:9px;letter-spacing:1px}
+.wi-channel-takeaway p{font-size:11px!important;line-height:1.5!important;color:#555!important;margin:5px 0!important;overflow-wrap:anywhere}
+.wi-channel-warning{font-size:9px;color:#8a6113;border-top:1px solid #eee;padding-top:10px}
+@media print {.wi-channel-handset{box-shadow:none}.wi-channel-landing{box-shadow:none}}
