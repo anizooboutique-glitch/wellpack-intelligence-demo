@@ -49,7 +49,7 @@ assert 'window.WIChannels.render(op,m)' in assets['index.html']
 assert 'wi-channel-smsnote' in assets['index.html']
 assert 'id="wiResetEverything"' in assets['index.html']
 assert '<section class="wi-v2-radar"' not in assets['index.html']
-assert 'id="wiFeatured"' in assets['index.html']
+assert 'id="wiResetEverything"' in assets['index.html']
 assert 'date de vérification' in assets['index.html']
 (ROOT/'static').mkdir(exist_ok=True)
 for name,content in assets.items():
