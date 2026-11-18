@@ -11,8 +11,8 @@ def apply(root,assets):
     h=assets['index.html']
     f=Path(root)/'frontend-release'/'regional_drive_data.json'
     entries=json.loads(f.read_text(encoding='utf-8'))['cases']
-    sm=re.search(r'window\\.WITestState=(.*?);window\\.WITestCases=',h,re.S)
-    mm=re.search(r'window\\.WITestCases=(.*?);\\s*</script>',h,re.S)
+    sm=re.search(r'window\.WITestState=(.*?);window\.WITestCases=',h,re.S)
+    mm=re.search(r'window\.WITestCases=(.*?);\\s*</script>',h,re.S)
     assert sm and mm,'Missing editorial collection'
     state=json.loads(sm.group(1));meta=json.loads(mm.group(1))
     assert len(entries)==8 and len({c['city'] for c in entries})==8
@@ -77,7 +77,7 @@ def apply(root,assets):
            'target':c['target'],'gate':c['check'],'end':c['end']}
     assert len(state['ops'])==23 and len(state['clients'])==23
     h=h[:mm.start(1)]+dump(meta)+h[mm.end(1):]
-    sm=re.search(r'window\\.WITestState=(.*?);window\\.WITestCases=',h,re.S)
+    sm=re.search(r'window\.WITestState=(.*?);window\.WITestCases=',h,re.S)
     h=h[:sm.start(1)]+dump(state)+h[sm.end(1):]
     # Only update the explanatory demo count; preserve custom names and user edits.
     h=h.replace('15 campagnes à tester : produits, services et promotions.',
